@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>ticket</title>
+  <style type="text/css">
+    body{
+    background-image: url(h1.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+
+  }
+
+  .loginbox{
+    width: 320px;
+    height: 420px;
+    background: #999966;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    font-family: sans-serif;
+  }
+
+  h1{
+
+    text-align: center;
+    font-size: 22px;
+  }
+
+
+
+  .login-box input{
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .login-box input[type="text"]
+  {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+
+  }
+
+  .login-box input[type="submit"]
+  {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #1c8adb;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+  }
+  .login-box input[type="submit"]:hover
+  {
+    cursor: pointer;
+    background: #39dc79;
+    color: #000;
+  }
+
+</style>
+</head>
+<body>
+  <div class="loginbox">
+    <h1>Family Fun Fair</h1>
+    <h1 lang = "en">Ticket Booking</h1>
+      <form>
+       <label for="name">Name:</label>
+        <input type="name" name="name" placeholder="Enter name"><br>
+        Date: <input type="date" id="myDate">
+          <script>
+            function myFunction() {
+            document.getElementById("myDate").value;
+            }
+          </script>
+
+
+
+
+
+
+
+        <input type="submit" name="submit" value="Login">
+        <br>
+        <br>
+
+
+
+      </form>
+
+  </div>
+
+</body>
+</html>

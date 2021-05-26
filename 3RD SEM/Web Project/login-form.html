@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign in form with facebook and google</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<style>
+*{
+	box-sizing:border-box;
+}
+body{
+	background:black;
+	background-size:cover;
+}
+.wrap{
+		max-width:400px;
+		margin:auto;
+		margin-top:50px;
+		padding:20px;
+		font-family:sans-serif;
+		background:#fff;
+		border-radius:10px;
+}
+.wrap h2{
+		font-size:2em;
+		text-align:center;
+}
+button{
+	padding:10px;
+	width:49%;
+	box-sizing:border-box;
+	border:none;
+	font-size:1.3em;
+	border-radius:10px;
+	font-wiegth:bold;
+}
+button a{
+	text-decoration:none;
+	color:#fff;
+}
+button:nth-child(1){
+	background:purple;
+}
+button:nth-child(2){
+	background:green;
+}
+button:hover{
+	background:rgba(0,0,0,0.6);
+}
+.fa{
+	font-size:1.3em;
+	font-weight:bold;
+}
+form{
+	margin-top:30px;
+}
+input[type=text],input[type=password],input[type=submit]{
+	width:100%;
+	padding:10px;
+	margin-bottom:15px;
+	font-size:17px;
+	border-radius:5px;
+	outline:none;
+	border:none;
+	border:2px solid gray;
+}
+label{
+	font-size-20px;
+	font-weight:bold;
+}
+input[type=submit]{
+	background:red;
+	border:none;
+	color:#fff;
+	font-size:20px;
+	font-weight:bold;
+	margin-top:20px;
+	padding:15px;
+	cursor:pointer;
+}
+
+		
+</style>
+</head>
+<body>
+<div class="wrap">
+	<h2> Log In With</h2>
+	<div class = "social-media">
+		<button><a href ="www.facebook.com"><i class ="fa fa-facebook"></i>Facebook</button>
+		<button><a href ="www.google.com"><i class ="fa fa-google"></i>Google</button>
+	</div>
+		<form>
+		<label>Username:</label><br>
+			<input type ="text">
+			<label>Password:</label><br>
+			<input type="password">
+			 <center>
+  <a href="my.html"><button class="button" >home</button></a>
+  </center>
+		
+			
+		</form>
+	<p>Not a Member?<a href="#">Sign Up Now</a></p>
+</div>
+</body>
+</html>

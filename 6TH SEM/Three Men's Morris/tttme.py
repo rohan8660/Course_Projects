@@ -59,7 +59,7 @@ class TTT(TwoPlayersGame):
         entries = ['-', 'O', 'x']
         for i in range(3):          # 0 1 2
             for j in range(3):      # 0 1 2
-                str = (entries[self.board[3*i+j]])  # ...........
+                str = (entries[self.board[3*i+j]])  # ...........rachana
                 print(str, end=" ")
             print("")
 

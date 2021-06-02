@@ -14,12 +14,7 @@ class TicTacToe( TwoPlayersGame ):
         self.nplayer = 1 # player 1 starts.
     
     def possible_moves(self):
-        #return [i+1 for i,e in enumerate(self.board) if e==0]
-        ls=[]
-        for i in range(len(self.board)):
-            if(self.board[i]==0):
-                ls.append(i+1)
-        return(ls)
+        return [i+1 for i,e in enumerate(self.board) if e==0]
     
     def make_move(self, move):
         self.board[int(move)-1] = self.nplayer

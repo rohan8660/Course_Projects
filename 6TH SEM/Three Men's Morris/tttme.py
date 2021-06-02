@@ -59,7 +59,7 @@ class TTT(TwoPlayersGame):
         entries = ['-', 'O', 'x']
         for i in range(3):          # 0 1 2
             for j in range(3):      # 0 1 2
-                str = (entries[self.board[3*i+j]])  # ...........rachanakampli
+                str = (entries[self.board[3*i+j]])
                 print(str, end=" ")
             print("")
 
@@ -67,6 +67,7 @@ class TTT(TwoPlayersGame):
         return -100 if self.lose() else 0
 
 
+# this is main function
 if __name__ == "__main__":
 
     from easyAI import AI_Player, Negamax

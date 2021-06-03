@@ -8,9 +8,9 @@ from easyAI.Player import Human_Player
 class MMM(TwoPlayersGame):
     """
         The board positions are numbered as follows :
-            1 2 3
-            4 5 6
-            7 8 9
+            1 2 1
+            2 1 2
+            0 2 0
     """
 
     def __init__(self, p):
@@ -19,28 +19,16 @@ class MMM(TwoPlayersGame):
         self.nplayer = 1  # first move player(1 starts)
 
 
-
     def possible_moves(self):
         lss=["12","14","21","23","25","32","36","41","45","47","52","54","56","58","65","63","69","74","78","83","87","89","96","98"]
-        if(self.nmove>7):
+        if(self.nmove>6):
             ls=[]
-
-            a=self.nopponent
-            if(a==1):
-                x=2
-            else:
-                x=1
-
+            x=self.nplayer
             for i in lss:
                 a=list(i)
-                print(a)
-                if(a[1]=='0' and a[0]==str(x)):
+                if(self.board[int(a[1])-1]==0 and self.board[int(a[0])-1]==(x)):
                     ls.append(i)
-            # a=self.nopponent
-            # if(a==1):
-            #     x=2
-            # else:
-            #     x=1
+            # x=self.nplayer
             # for i, e in enumerate(self.board):
             #     if e == x :
             #         if(i+1+1==0):
@@ -57,26 +45,24 @@ class MMM(TwoPlayersGame):
             # for i in range(len(ls)):
             #     st=""
             #     for j in ls[i]:
-            #         st+=str(j)
+            #         st+=str(j)                                     check if place to go is free
             #     ls[i]=st
             #     ls[i]=str(ls[i])
+            # print(ls)
             return(ls)
         else:
             return [i+1 for i, e in enumerate(self.board) if e == 0]
 
     def make_move(self, move):
         
-        if(self.nmove>7):
-            mov=list(str(move))
+        if(self.nmove>6):
+            mov=list(str(move)) #[1,2]
             mov[0]=int(mov[0])
             mov[1]=int(mov[1])
-            self.board[int(mov)[1]-1]=self.nplayer
-            self.board[int(mov[0])]=0
+            self.board[int(mov[0])-1]=0                    #remove
+            self.board[int(mov[1])-1]=self.nplayer      #add new place              
         else:
             self.board[int(move)-1] = self.nplayer
-
-
-
 
     def lose(self):
         """ DID I LOSE ? LOSING CONDITIONS """
@@ -103,5 +89,5 @@ class MMM(TwoPlayersGame):
 
 if __name__ == "__main__":
     from easyAI import AI_Player, Negamax
-    ai_algo = Negamax(6)
+    ai_algo = Negamax(10)
     MMM([Human_Player(), AI_Player(ai_algo)]).play()

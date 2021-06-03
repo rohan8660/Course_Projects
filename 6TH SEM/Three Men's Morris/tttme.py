@@ -14,6 +14,7 @@ class TTT( TwoPlayersGame ):
         self.players = players
         self.board = [0 for i in range(9)]  #setting all zeroes
         self.nplayer = 1                    # player 1 starts.
+        # self.scres=["0","0"]
 
     def possible_moves(self):               #returns list of empty places from board
         ls=[]
@@ -30,17 +31,10 @@ class TTT( TwoPlayersGame ):
 
     def lose(self):
         """ Has the opponent "three in line ?" """
-        return any( [all([(self.board[c-1]== self.nopponent)
-                      for c in line])
-                      for line in [[1,2,3],[4,5,6],[7,8,9], # horiz.
-                                   [1,4,7],[2,5,8],[3,6,9], # vertical
-                                   [1,5,9],[3,5,7]]]) # diagonal
-
-    def lose(self):
-        """ Has the opponent "three in line ?" """
         ls=[
             [1,2,3],[4,5,6],[7,8,9],#horizontal
-            [1,4,7],[2,5,8],[3,6,9]] # vertical
+            [1,4,7],[2,5,8],[3,6,9],# vertical
+            [1,5,9],[3,5,7]] #diagonal
         for i in ls:
             for j in i:
                 if(self.board[j-1]==self.nopponent):
@@ -52,8 +46,15 @@ class TTT( TwoPlayersGame ):
         return 0
 
     def is_over(self):
-        return (self.possible_moves() == []) or self.lose()
-
+        if ((self.possible_moves() == []) or self.lose()):
+        #     self.scres[1]
+        #     a=self.scres[1]
+        #     a=int(a)
+        #     a+=1
+        #     a=str(a)
+        #     self.scres[1]=a
+            return 1
+        
     def show(self):
         entries=['-','O','x']
         for i in range(3):          # 0 1 2
@@ -61,12 +62,15 @@ class TTT( TwoPlayersGame ):
                 str=(entries[self.board[3*i+j]]) 
                 print(str,end=" ")
             print("")
+        # print ("Players\t1\t2")
+        # print ("scres \t",end="")
+        # print
+        # print("\t".join(self.scres))
 
     def scoring(self):
         return -100 if self.lose() else 0
 
 if __name__ == "__main__":
-    
     from easyAI import AI_Player, Negamax
-    ai_algo = Negamax(6)
-    TTT( [Human_Player(),AI_Player(ai_algo)]).play()
+    ai_algo = Negamax(1)
+    a=TTT([Human_Player(),AI_Player(ai_algo)]).play()

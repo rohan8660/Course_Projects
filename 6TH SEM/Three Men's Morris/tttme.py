@@ -3,7 +3,7 @@ from easyAI.Player import Human_Player
 
 class TTT( TwoPlayersGame ):
     """ The board positions are numbered as follows:
-            7 8 9   0 0 1
+            7 8 9   0 0 0
             4 5 6   0 0 0
             1 2 3   0 0 0
     """  
@@ -72,5 +72,5 @@ class TTT( TwoPlayersGame ):
 
 if __name__ == "__main__":
     from easyAI import AI_Player, Negamax
-    ai_algo = Negamax(1)
+    ai_algo = Negamax(6)
     a=TTT([Human_Player(),AI_Player(ai_algo)]).play()

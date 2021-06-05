@@ -51,28 +51,32 @@ class MMM(TwoPlayersGame):
     def is_over(self):
         if((self.possible_moves() == []) or self.lose()):
             self.winner=self.nopponent
-        return (self.possible_moves() == []) or self.lose()
+        if(self.nmove>20):
+            print("")
+            print("\t\tMATCH DRAW\t\t")
+            return 1
+        return (self.possible_moves() == []) or self.lose() 
 
     def show(self):
         #print(self.board)
-        print(" _______________________________________________________")
-        print("|\t\t\t\t\t\t\t|")
+        print(" ________________________________________________________")
+        print("|\t\t\t\t\t\t\t |")
         print("|\tScores:\tPlayer1=",end=" ")
         print(p1,end="") 
         print("\tPlayer2=",end=" ")
         print(p2,end="")
-        print("\t\t|")
-        print("|_______________________________________________________|")
+        print("\t\t |")
+        print("|________________________________________________________|")
         entries=['-','O','x']
-        print("|\t\t\t\t\t\t\t|")
+        print("|\t\t\t\t\t\t\t |")
         for i in range(3):
             print("|\t\t",end="\t")          # 0 1 2
             for j in range(3):      # 0 1 2
                 str=(entries[self.board[3*i+j]]) 
                 print(str,end=" ")
-            print("\t\t\t\t|")
-        print("|\t\t\t\t\t\t\t|")
-        print("|_______________________________________________________|")
+            print("\t\t\t\t |")
+        print("|\t\t\t\t\t\t\t |")
+        print("|________________________________________________________|")
 
     def scoring(self):
         return -100 if self.lose() else 0 
@@ -81,61 +85,124 @@ def askntell():
     print("Difficulty Level ?? (Easy=E Medium=M Hard=H)  :",end="")
     diff=input()
     if(diff=="E" or diff=="e"):
-        print("")
-        print("\t\t EASY MODE SELECTED \t\t")
+        print(" ________________________________________________________")
+        print("|\t\t\t\t\t\t\t |")
+        print("|****************   EASY MODE SELECTED  *****************|")
+        print("|________________________________________________________|")
         print("")
         return 2
     if(diff=="M" or diff=="m"):
-        print("")
-        print("\t\t MEDIUM MODE SELECTED \t\t")
+        print(" ________________________________________________________")
+        print("|\t\t\t\t\t\t\t |")
+        print("|****************  MEDIUM MODE SELECTED  ****************|")
+        print("|________________________________________________________|")
         print("")
         return 3
     if(diff=="H" or diff=="h"):
-        print("")
-        print("\t\t HARD MODE SELECTED \t\t")
+        print(" ________________________________________________________")
+        print("|\t\t\t\t\t\t\t |")
+        print("|****************   HARD MODE SELECTED  *****************|")
+        print("|________________________________________________________|")
         print("")
         return 4
     else:
-        print("Enter a valid input.")
+        print("Enter a valid input!.")
         diff=askntell()
         return diff
 
+def show_rules():
+    print(" ________________________________________________________ ")
+    print("|\t\t\t\t\t\t\t |")
+    print("|\t\t\tRULES\t\t\t\t |")
+    print("|________________________________________________________|")
+    print("|\t\t\t\t\t\t\t |")
+    print("|\t1. To begin: \t\t\t\t\t |")
+    print("|\t   the board is empty, and each player has three |")
+    print("|\t   pieces in hand. Players decide at random who  |")
+    print("|\t   goes first.\t\t\t\t\t |")
+    print("|\t\t\t\t\t\t\t |")
+    print("|\t2. Placement & movement: \t\t\t |")
+    print("|\t   Each player takes it in turn to place a piece |")
+    print("|\t   on any intersection on the board. When all of |")
+    print("|\t   the pieces are entered, players instead move  |")
+    print("|\t   a piece on the board along a marked line to   |")
+    print("|\t   the adjacent point a horizontal or vertical   |")
+    print("|\t   line to win.\t\t\t\t\t |")
+    print("|\t\t\t\t\t\t\t |")
+    print("|\t3. To win: \t\t\t\t\t |")
+    print("|\t   When one player has a straight line of three  |")
+    print("|\t   of their own pieces, horizontally, vertically |")
+    print("|\t   or diagonally along a marked line, that \t |")
+    print("|\t   player wins the game.\t\t\t |")
+    print("|\t\t\t\t\t\t\t |")
+    print("|\t4. Board Layout (Numbering of Places): \t\t |")
+    print("|\t   \t\t 1  2  3 \t\t\t |")
+    print("|\t   \t\t 4  5  6 \t\t\t |")
+    print("|\t   \t\t 7  8  9 \t\t\t |")
+    print("|\t\t\t\t\t\t\t |")
+    print("|\t5. To move: \t\t\t\t\t |")
+    print("|\t   A peice from fourth place to fifth place, \t |")
+    print("|\t   you can enter '45'. \t\t\t\t |")
+    print("|\t\t\t\t\t\t\t |")
+    print("|________________________________________________________|")
+    print("")
+
+def game_over_scene():
+    print("")
+    print("\t\tGAME OVER\t\t")
+    print("\t\tPlayer ",end="")
+    print(a.winner,end=" ")
+    print(" WON")
+    print("")
+    print("Do you want to play again ?     Y/N  :",end="")
+
+def game_exit_scene():
+            print(" ________________________________________________________")
+            print("|\t\t\t\t\t\t\t |")
+            print("|\tScores:\tPlayer1=",end=" ")
+            print(p1,end="") 
+            print("\tPlayer2=",end=" ")
+            print(p2,end="")
+            print("\t\t |")
+            print("|________________________________________________________|")
+            print("")
+            print("\t\t WINNER: PLAYER ",end="")
+            if(p1>p2):
+                print("1")
+            else:
+                print("2")
+            print(" ________________________________________________________")
+            print("|\t\t\t\t\t\t\t |")
+            print("|******************   GAME EXIT  ************************|")
+            print("|________________________________________________________|")
+            print("")
+            
+
+
 if __name__ == "__main__":
     from easyAI import AI_Player, Negamax
-    print(" _______________________________________________________ ")
-    print("|\t\t\t\t\t\t\t|")
-    print("|\t\t\tRULES\t\t\t\t|")
-    print("|_______________________________________________________|")
-    print("|\t\t\t\t\t\t\t|")
-    print("|\t1. Similar to tic tac toe for first six moves.\t|")
-    print("|\t2. Then u hav to move ur peices around to make  |")
-    print("|\t   a horizontal or vertical line to win.\t|")
-    print("|\t3. No diagonal movement or win cases. \t\t|")
-    print("|_______________________________________________________|")
-    print("")
+    show_rules()
     diff=askntell()
     ai_algo = Negamax(diff)
     rest=1
     p1,p2=0,0
     while(rest):
+
+        #starting a game
         a=MMM([Human_Player(), AI_Player(ai_algo)])
         a.play()
+
+        # updating scores
         if(a.winner==1):
             p1+=1
         else:
             p2+=1
-        print("")
-        print("\t\tGAME OVER\t\t")
-        print("\t\tPlayer ",end="")
-        print(a.winner,end=" ")
-        print(" WON")
-        print("")
-        print("Do you want to play again ?     Y/N  :",end="")
+        
+        # end UI
+        game_over_scene()
         restart=(input())
         print("")
         if(restart=="N" or restart=="n"):
-            print(" _______________________________________________________")
-            print("|\t\t\t\t\t\t\t|")
-            print("|******************   GAME EXIT  ***********************|")
-            print("|_______________________________________________________|")
+            game_exit_scene()
             break
+            

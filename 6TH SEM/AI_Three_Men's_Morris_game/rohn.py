@@ -6,18 +6,22 @@ from easyAI.Player import Human_Player
 class MMM(TwoPlayersGame):
     """
         The board positions are numbered as follows :
-            1 2 1
-            2 1 2
-            0 2 0
+            1 2 3
+            4 5 6
+            7 8 9
     """
     def __init__(self, p):
         self.players = p
         self.board = [0 for i in range(9)]
-        self.nplayer = 1  # first move player(1 starts)
+        # first move player(1 starts)
+        self.nplayer = 1  
         self.winner=0
 
     def possible_moves(self):
+        # all possible moves on board
         lss=["12","14","21","23","25","32","36","41","45","47","52","54","56","58","65","63","69","74","78","85","87","89","96","98"]
+        
+        # now possible moves
         if(self.nmove>6):
             ls=[]
             x=self.nplayer
@@ -30,27 +34,30 @@ class MMM(TwoPlayersGame):
             return [i+1 for i, e in enumerate(self.board) if e == 0]
 
     def make_move(self, move):
-        
         if(self.nmove>6):
+            # how to move after first 6 moves
             mov=list(str(move)) #[1,2]
             mov[0]=int(mov[0])
             mov[1]=int(mov[1])
-            self.board[int(mov[0])-1]=0                    #remove
-            self.board[int(mov[1])-1]=self.nplayer      #add new place              
+            # board update
+            self.board[int(mov[0])-1]=0                 
+            self.board[int(mov[1])-1]=self.nplayer                    
         else:
+            # how to move first 6 moves
             self.board[int(move)-1] = self.nplayer
 
     def lose(self):
         """ DID I LOSE ? LOSING CONDITIONS """
         ret = any([all([(self.board[c-1] == self.nopponent)for c in line])for line in [
-                            [1, 2, 3], [4, 5, 6], [7, 8, 9],  # horizontal
-                            [1, 4, 7], [2, 5, 8], [3, 6, 9]  # vertical
+                            [1, 2, 3], [4, 5, 6], [7, 8, 9],  # horizontal win cases
+                            [1, 4, 7], [2, 5, 8], [3, 6, 9]  # vertical wincases
                 ]])
         return ret
 
     def is_over(self):
         if((self.possible_moves() == []) or self.lose()):
             self.winner=self.nopponent
+        # limit to 20 moves and declare draw
         if(self.nmove>20):
             print("")
             print("\t\tMATCH DRAW\t\t")
@@ -58,7 +65,7 @@ class MMM(TwoPlayersGame):
         return (self.possible_moves() == []) or self.lose() 
 
     def show(self):
-        #print(self.board)
+        # things to show for each move
         print(" ________________________________________________________")
         print("|\t\t\t\t\t\t\t |")
         print("|\tScores:\tPlayer1=",end=" ")
@@ -81,7 +88,11 @@ class MMM(TwoPlayersGame):
     def scoring(self):
         return -100 if self.lose() else 0 
 
-def askntell():
+# Selects the difficulty level of game.
+def mode_selection():
+    """
+        Selects the difficulty level of game.
+    """
     print("Difficulty Level ?? (Easy=E Medium=M Hard=H)  :",end="")
     diff=input()
     if(diff=="E" or diff=="e"):
@@ -110,6 +121,7 @@ def askntell():
         diff=askntell()
         return diff
 
+# shows the rules initially
 def show_rules():
     print(" ________________________________________________________ ")
     print("|\t\t\t\t\t\t\t |")
@@ -147,6 +159,7 @@ def show_rules():
     print("|________________________________________________________|")
     print("")
 
+# shows options after each game
 def game_over_scene():
     print("")
     print("\t\tGAME OVER\t\t")
@@ -156,6 +169,7 @@ def game_over_scene():
     print("")
     print("Do you want to play again ?     Y/N  :",end="")
 
+# shows exit screen contents
 def game_exit_scene():
             print(" ________________________________________________________")
             print("|\t\t\t\t\t\t\t |")
@@ -177,12 +191,10 @@ def game_exit_scene():
             print("|________________________________________________________|")
             print("")
             
-
-
 if __name__ == "__main__":
     from easyAI import AI_Player, Negamax
     show_rules()
-    diff=askntell()
+    diff=mode_selection()
     ai_algo = Negamax(diff)
     rest=1
     p1,p2=0,0

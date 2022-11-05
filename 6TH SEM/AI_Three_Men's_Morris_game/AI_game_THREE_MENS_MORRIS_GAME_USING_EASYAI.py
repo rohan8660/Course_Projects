@@ -50,7 +50,8 @@ class MMM(TwoPlayersGame):
         """ DID I LOSE ? LOSING CONDITIONS """
         ret = any([all([(self.board[c-1] == self.opponent_index)for c in line])for line in [
                             [1, 2, 3], [4, 5, 6], [7, 8, 9],  # horizontal win cases
-                            [1, 4, 7], [2, 5, 8], [3, 6, 9]  # vertical wincases
+                            [1, 4, 7], [2, 5, 8], [3, 6, 9],  # vertical win cases
+                            [1, 5, 9], [3,5,7] # diagonal win cases
                 ]])
         return ret
 

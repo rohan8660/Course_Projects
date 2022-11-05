@@ -1,5 +1,5 @@
 # importing easyAI library components
-from easyAI import TwoPlayersGame
+from easyAI import TwoPlayerGame as TwoPlayersGame
 from easyAI.Player import Human_Player
 
 # inheriting TwoPlayersGame class
@@ -14,7 +14,7 @@ class MMM(TwoPlayersGame):
         self.players = p
         self.board = [0 for i in range(9)]
         # first move player(1 starts)
-        self.nplayer = 1  
+        self.current_player = 1  
         self.winner=0
 
     def possible_moves(self):
@@ -24,7 +24,7 @@ class MMM(TwoPlayersGame):
         # now possible moves
         if(self.nmove>6):
             ls=[]
-            x=self.nplayer
+            x=self.current_player
             for i in lss:
                 a=list(i)
                 if(self.board[int(a[1])-1]==0 and self.board[int(a[0])-1]==(x)):
@@ -41,14 +41,14 @@ class MMM(TwoPlayersGame):
             mov[1]=int(mov[1])
             # board update
             self.board[int(mov[0])-1]=0                 
-            self.board[int(mov[1])-1]=self.nplayer                    
+            self.board[int(mov[1])-1]=self.current_player                    
         else:
             # how to move first 6 moves
-            self.board[int(move)-1] = self.nplayer
+            self.board[int(move)-1] = self.current_player
 
     def lose(self):
         """ DID I LOSE ? LOSING CONDITIONS """
-        ret = any([all([(self.board[c-1] == self.nopponent)for c in line])for line in [
+        ret = any([all([(self.board[c-1] == self.opponent_index)for c in line])for line in [
                             [1, 2, 3], [4, 5, 6], [7, 8, 9],  # horizontal win cases
                             [1, 4, 7], [2, 5, 8], [3, 6, 9]  # vertical wincases
                 ]])
@@ -56,7 +56,7 @@ class MMM(TwoPlayersGame):
 
     def is_over(self):
         if((self.possible_moves() == []) or self.lose()):
-            self.winner=self.nopponent
+            self.winner=self.opponent_index
         # limit to 20 moves and declare draw
         if(self.nmove>20):
             print("")
